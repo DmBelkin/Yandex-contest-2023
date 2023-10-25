@@ -18,6 +18,12 @@ public class Hokku {
             System.out.println(result);
             input = result;
         }
+        int cupIndex = result.indexOf('C');
+        int yandexIndex = result.indexOf('Y');
+        if (cupIndex < yandexIndex) {
+            result = result.substring(0, cupIndex) +
+                    result.substring(cupIndex + 3) + "Cup";
+        }
         writer.write(result);
         writer.close();
         return resultFile;
@@ -34,6 +40,11 @@ public class Hokku {
                 result += input.substring(index + str.length() - i);
                 break;
             }
+        }
+        if (result.equals("") && input.contains("Yandex")) {
+            return input.substring(0, input.length() - 3) + "Cup";
+        } else if (result.equals("")) {
+            return "Yandex" + input.substring(6, input.length() - 2);
         }
         return result;
     }

@@ -39,4 +39,11 @@ public class HokkuTest extends TestCase {
         assertEquals("YandexjhdskCupsajdhfgk", result);
     }
 
+    public  void testNodes4() throws IOException {
+        File file = new File("input/input17.txt");
+        hokku.hokku(file);
+        String result = Files.readString(Paths.get(resultFile.getPath()));
+        assertEquals("YandexCup", result);
+    }
+
 }
