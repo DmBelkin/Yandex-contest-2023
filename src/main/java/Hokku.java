@@ -5,8 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Hokku {
-
-
+    
     public File hokku(File file) throws IOException {
         File resultFile = new File("out/output7.txt");
         PrintWriter writer = new PrintWriter(resultFile);
