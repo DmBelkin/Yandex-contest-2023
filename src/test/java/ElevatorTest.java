@@ -17,4 +17,11 @@ public class ElevatorTest extends TestCase {
         String result = Files.readString(Paths.get(resultFile.getPath()));
         assertEquals("8", result);
     }
+
+    public  void testElevator1() throws IOException {
+        File file = new File("input/input21.txt");
+        elevator.elevator(file);
+        String result = Files.readString(Paths.get(resultFile.getPath()));
+        assertEquals("8", result);
+    }
 }
