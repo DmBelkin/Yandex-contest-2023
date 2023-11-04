@@ -1,52 +1,62 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 
 public class Elevator {
 
     public File elevator(File file) throws IOException {
         File resultFile = new File("out/output8.txt");
+        long start = System.currentTimeMillis();
         List<String> list = Files.readAllLines(Paths.get(file.getPath()));
         int elevatorMax = Integer.parseInt(list.get(0));
-        System.out.println(elevatorMax + "max");
         int floorCount = Integer.parseInt(list.get(1));
-        System.out.println(floorCount + "count");
-        int[] floors = new int[floorCount];
-        int index = 0;
-        int peopleCount = 0;
-        for (int i = 2; i < list.size(); i++) {
+        int index = 1;
+        BigInteger peopleCount = BigInteger.ZERO;//накапливает огромное число
+        long[] floors = new long[floorCount + 1];
+        for (int i = 2; i < floorCount + 2; i++) {
             floors[index++] = Integer.parseInt(list.get(i));
-            peopleCount += Integer.parseInt(list.get(i));
+            peopleCount = peopleCount.add(BigInteger.valueOf(Long.parseLong(list.get(i))));
         }
-        System.out.println(Arrays.toString(floors));
-        int seconds = 0;
-        int high = floorCount;
-        for (int i = high - 1; i >= 0; i--) {
-            seconds += high;
-            System.out.println(high + "high");
-            System.out.println(seconds + "seconds");
-            int people = 0;
-            while (people <= elevatorMax && peopleCount > 0 && floors[i] >= 0) {
-                if (people == elevatorMax) {
-                    seconds += high;
+        BigInteger seconds = BigInteger.ZERO;
+        long people = 0;
+        while (peopleCount.compareTo(BigInteger.ZERO) > 0 && floorCount >= 0) {
+            if (floors[floorCount] > 1000000 && people == 0) {
+                seconds = seconds.add(BigInteger.valueOf((floors[floorCount] / elevatorMax) * floorCount * 2));
+                peopleCount = peopleCount.subtract(BigInteger.valueOf(floors[floorCount]
+                        - floors[floorCount] % elevatorMax));
+                floors[floorCount] -= floors[floorCount] - floors[floorCount] % elevatorMax;
+                continue;
+            }
+            if (people == 0) {
+                seconds = seconds.add(BigInteger.valueOf(floorCount));
+                while (floors[floorCount] == 0) {
+                    seconds = seconds.subtract(BigInteger.ONE);
+                    floorCount--;
                 }
-                if (floors[i] == 0) {
-                    high--;
-                    seconds++;
-                }
-                people++;
-                floors[i]--;
-                peopleCount--;
+            }
+            long peopleOnFloor = floors[floorCount];
+            long transaction = peopleOnFloor <= elevatorMax - people ? peopleOnFloor : elevatorMax - people;
+            people += transaction;
+            peopleCount = peopleCount.subtract(BigInteger.valueOf(transaction));
+            floors[floorCount] -= transaction;
+            if (floors[floorCount] == 0) {
+                seconds = seconds.add(BigInteger.ONE);
+                floorCount--;
+            }
+            if (people == elevatorMax || peopleCount.intValue() == 0) {
+                people = 0;
+                seconds = seconds.add(BigInteger.valueOf(floorCount));
             }
         }
         PrintWriter writer = new PrintWriter(resultFile);
-        writer.write(Integer.toString(seconds));
+        writer.write(seconds.toString());
         writer.close();
+        long end = System.currentTimeMillis();
+        System.out.println("time: " + (end - start));
         return resultFile;
     }
-
 }

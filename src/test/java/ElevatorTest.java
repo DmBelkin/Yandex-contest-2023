@@ -11,6 +11,13 @@ public class ElevatorTest extends TestCase {
 
     private File resultFile = new File("out/output8.txt");
 
+    public  void testElevator3() throws IOException {
+        File file = new File("input/input24.txt");
+        elevator.elevator(file);
+        String result = Files.readString(Paths.get(resultFile.getPath()));
+        assertEquals("2286", result);
+    }
+
     public  void testElevator() throws IOException {
         File file = new File("input/input20.txt");
         elevator.elevator(file);
@@ -19,9 +26,24 @@ public class ElevatorTest extends TestCase {
     }
 
     public  void testElevator1() throws IOException {
-        File file = new File("input/input21.txt");
+        File file = new File("input/input22.txt");
         elevator.elevator(file);
         String result = Files.readString(Paths.get(resultFile.getPath()));
-        assertEquals("8", result);
+        assertEquals("30", result);
     }
+
+    public  void testElevator2() throws IOException {
+        File file = new File("input/input23.txt");
+        elevator.elevator(file);
+        String result = Files.readString(Paths.get(resultFile.getPath()));
+        assertEquals("7278", result);
+    }
+
+    public  void testElevator4() throws IOException {
+        File file = new File("input/input25.txt");
+        elevator.elevator(file);
+        String result = Files.readString(Paths.get(resultFile.getPath()));
+        assertEquals("2147468026", result);
+    }
+
 }

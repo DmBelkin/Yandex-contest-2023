@@ -35,27 +35,4 @@ public class NotMin {
         writer.close();
         return resultFile;
     }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int length = Integer.parseInt(scanner.nextLine());
-        String[] input = scanner.nextLine().split("\\s");
-        StringBuilder builder = new StringBuilder();
-        int save = 0;
-        for (int i = 0; i < input.length; i++) {
-            int hate = 0;
-            int studentRate = Integer.parseInt(input[i]);
-            if (i > 0 && studentRate == Integer.parseInt(input[i - 1])) {
-                builder.append(save + "\s");
-                continue;
-            }
-            for (int j = 0; j < input.length; j++) {
-                hate += Math.abs(Integer.parseInt(input[j]) - studentRate);
-            }
-            save = hate;
-            builder.append(hate + "\s");
-        }
-        System.out.println(builder);
-    }
-
 }
