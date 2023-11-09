@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Middle {
 
     public static void main(String[] args) throws InterruptedException {
+
+        //оформить с тестом
         Scanner scanner = new Scanner(System.in);
         int length = Integer.parseInt(scanner.nextLine());
         String[] input = scanner.nextLine().split("\\s");

@@ -7,7 +7,7 @@ public class WalkinMoscow {
         Scanner scanner = new Scanner(System.in);
         calculateDist(scanner.nextLine());
     }
-//оформить с тестом
+//оформить с тeстом
 
     public static void  calculateDist(String input) {
         String[] coordinates = input.split("\\s");
