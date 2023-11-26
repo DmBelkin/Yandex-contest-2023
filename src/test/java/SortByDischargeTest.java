@@ -20,6 +20,7 @@ public class SortByDischargeTest extends TestCase {
         for (String s : result) {
             res += s + "\n";
         }
+        System.out.println(res);
         assertEquals("Initial array:\n" +
                 "12, 32, 45, 67, 98, 29, 61, 35, 09\n" +
                 "**********\n" +

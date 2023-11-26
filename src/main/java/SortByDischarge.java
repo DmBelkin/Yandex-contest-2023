@@ -11,7 +11,7 @@ public class SortByDischarge {
 
     private  int[] frequency;
 
-    public  File radixSort(File file) throws IOException {
+    public File radixSort(File file) throws IOException {
         File resultFile = new File("out/outputPart.txt");
         PrintWriter writer = new PrintWriter(resultFile);
         List<String> list = Files.readAllLines(Paths.get(file.getPath()));
@@ -67,7 +67,7 @@ public class SortByDischarge {
         return resultFile;
     }
 
-    public  void prettyPrint(Bucket[] buckets, Item[] items, StringBuilder builder, int phase) {
+    public void prettyPrint(Bucket[] buckets, Item[] items, StringBuilder builder, int phase) {
         for (int k = 0; k < buckets.length; k++) {
             Bucket bucket = buckets[k];
             for (int j = 0; j < items.length; j++) {
@@ -94,7 +94,7 @@ public class SortByDischarge {
         return max;
     }
 
-    public  void sortByDischarge(Item[] stack, int max) {
+    public void sortByDischarge(Item[] stack, int max) {
 
         int range = 10;
 
