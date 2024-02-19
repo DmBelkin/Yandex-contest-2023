@@ -1,10 +1,7 @@
-import java.io.File;
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class FinalContest {
 
@@ -17,22 +14,22 @@ public class FinalContest {
 
     public static List<Integer> solution(Integer s) {
         List<Integer> list = new ArrayList<>();
-        int fn = factorial(s);
+        long fn = factorial(s);
         int sum = 0;
         System.out.println(fn);
         for (int i = 0;s - i > 0; i++) {
-            int num = fn / (factorial(i) * factorial(s - i));
+            long num = fn / (factorial(i) * factorial(s - i));
             sum += num;
             System.out.println(num);
-            list.add(num);
+            list.add((int)num);
         }
         list.add(1);
         return list;
 
     }
 
-    public static int factorial(int n) {
-        int res = 1;
+    public static long factorial(int n) {
+        long res = 1;
         for (int i = 1; i <=n; i++) {
             res *= i;
         }

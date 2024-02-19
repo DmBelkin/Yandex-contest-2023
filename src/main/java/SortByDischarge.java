@@ -117,47 +117,49 @@ public class SortByDischarge {
 
         System.arraycopy(sortedValues, 0, stack, 0, stack.length);
     }
+
+    class Item {
+
+        int[] array;
+        int sortIndex;
+        String val = "";
+        long value;
+        String num = "";
+
+        public Item(int[] array, int sortIndex, String num) {
+            this.array = array;
+            this.sortIndex = sortIndex;
+            this.num = num;
+            switchValue(sortIndex);
+        }
+
+        public void switchValue(int sortIndex) {
+            val = Integer.toString(array[sortIndex]);
+            value = Long.parseLong(val);
+        }
+    }
+
+    class Bucket {
+        int sortIndex;
+        String values = "";
+        int number;
+
+        public Bucket(int sortIndex, int number) {
+            this.sortIndex = sortIndex;
+            this.number = number;
+        }
+
+        public void setValues(String num) {
+            values = values + num + ",\s";
+        }
+
+        @Override
+        public String toString() {
+            return "Bucket" + "\s" + number + ":" +
+                    "\s" + values;
+        }
+    }
 }
 
 
-class Item {
 
-    int[] array;
-    int sortIndex;
-    String val = "";
-    long value;
-    String num = "";
-
-    public Item(int[] array, int sortIndex, String num) {
-        this.array = array;
-        this.sortIndex = sortIndex;
-        this.num = num;
-        switchValue(sortIndex);
-    }
-
-    public void switchValue(int sortIndex) {
-        val = Integer.toString(array[sortIndex]);
-        value = Long.parseLong(val);
-    }
-}
-
-class Bucket {
-    int sortIndex;
-    String values = "";
-    int number;
-
-    public Bucket(int sortIndex, int number) {
-        this.sortIndex = sortIndex;
-        this.number = number;
-    }
-
-    public void setValues(String num) {
-        values = values + num + ",\s";
-    }
-
-    @Override
-    public String toString() {
-        return "Bucket" + "\s" + number + ":" +
-                "\s" + values;
-    }
-}
